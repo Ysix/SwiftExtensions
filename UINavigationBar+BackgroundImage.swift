@@ -1,5 +1,5 @@
 //
-//  UINavigationBar+BackgroundImage.swift
+//  UINavigationBar+Image.swift
 //
 //
 //  Created by Eddy Claessens on 21/03/16.
@@ -11,9 +11,9 @@ import UIKit
 
 @IBDesignable extension UINavigationBar {
 
-    @IBInspectable var clearBackground: Bool {
+    @IBInspectable var clear: Bool {
         get {
-            return self.image?.size.height == 0 && self.imageCompact?.size.height == 0 && self.shadowHidden && self.translucent
+            return self.image?.size.height == 0 && self.imageCompact?.size.height == 0 && self.shadowHidden && self.isTranslucent
         }
         set {
             if newValue {
@@ -30,19 +30,19 @@ import UIKit
 
     @IBInspectable var image: UIImage? {
         get {
-            return self.backgroundImageForBarMetrics(.Default)
+            return self.Image(for: .default)
         }
         set {
-            self.setBackgroundImage(newValue, forBarMetrics: .Default)
+            self.setImage(newValue, for: .default)
         }
     }
 
     @IBInspectable var imageCompact: UIImage? {
         get {
-            return self.backgroundImageForBarMetrics(.Compact)
+            return self.Image(for: .compact)
         }
         set {
-            self.setBackgroundImage(newValue, forBarMetrics: .Compact)
+            self.setImage(newValue, for: .compact)
         }
     }
 

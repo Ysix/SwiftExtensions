@@ -1,0 +1,15 @@
+/* 
+  ImageRequestable.strings
+  Background
+
+  Created by Eddy Claessens on 14/03/2017.
+  Copyright © 2017 OMTS. All rights reserved.
+*/
+
+"RequestImage_alert_title" = "Import picture";
+"RequestImage_alert_message" = "Do you want to take a new picture or choose one from your photo library?";
+"RequestImage_action_cancel" = "Cancel";
+
+
+"RequestImage_action_take" = "Take a new picture";
+"RequestImage_action_choose" = "Choose one from my photo library";

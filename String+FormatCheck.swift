@@ -11,6 +11,6 @@ import Foundation
 extension String {
     var isValidEmail: Bool { // contains an @ and at least 1 dot after : see https://davidcel.is/posts/stop-validating-email-addresses-with-regex/
         let emailRegex = ".+@.+\\..+"
-        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluateWithObject(self)
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: self)
     }
 }

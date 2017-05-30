@@ -11,7 +11,7 @@ import UIKit
 public let ReachabilityChangedNotification = "ReachabilityChangedNotification"
 
 protocol ReachabilityDelegate {
-    func reachabilityChanged(internetReachable: Bool) // This method should be used for disable or enable part of the interface (add or submit buttons, ...)
+    func reachabilityChanged(_ internetReachable: Bool) // This method should be used for disable or enable part of the interface (add or submit buttons, ...)
 }
 
 protocol ReachabilityManager {
@@ -22,7 +22,7 @@ extension UIViewController {
 
     var internetReachable: Bool {
         get {
-            guard let reachabilityManager = UIApplication.sharedApplication().delegate as? ReachabilityManager else {
+            guard let reachabilityManager = UIApplication.shared.delegate as? ReachabilityManager else {
                 assert(false, "AppDelegate is not implementing ReachabilityManager")
                 return false
             }
@@ -31,23 +31,23 @@ extension UIViewController {
     }
 
     func startListeningReachability() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UIViewController.reachabilityChanged), name: ReachabilityChangedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(UIViewController.reachabilityChanged), name:Constants.InternNotification.internetReachabilityChanged.name, object: nil)
         self.reachabilityChanged()
     }
 
     func reachabilityChanged() {
-        guard let reachabilityManager = UIApplication.sharedApplication().delegate as? ReachabilityManager else {
+        guard let reachabilityManager = UIApplication.shared.delegate as? ReachabilityManager else {
             assert(false, "AppDelegate is not implementing ReachabilityManager")
             return
         }
         if let reachabilityDelegate = self as? ReachabilityDelegate {
             reachabilityDelegate.reachabilityChanged(reachabilityManager.internetReachable)
         } else {
-            assert(false, "\(String(self.dynamicType)) is not implementing ReachabilityDelegate")
+            assert(false, "\(String(describing: type(of: self))) is not implementing ReachabilityDelegate")
         }
     }
 
     func stopListeningReachability() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: ReachabilityChangedNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Constants.InternNotification.internetReachabilityChanged.name, object: nil)
     }
 }
